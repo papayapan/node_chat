@@ -7,9 +7,18 @@ async function createMessage({ userId, content, roomId }) {
     roomId,
   });
 
-  return message; // Changed from user
+  return message;
+}
+
+async function findByRoomId(roomId) {
+  const messages = await Message.findAll({
+    where: { roomId },
+  });
+
+  return messages;
 }
 
 module.exports = {
   createMessage,
+  findByRoomId,
 };
