@@ -1,11 +1,15 @@
 const { registerUser } = require('../services/user.service');
 
 const createUser = async (req, res) => {
-  const { name } = req.body;
+  const { username, email, password } = req.body;
 
-  const user = await registerUser(name);
+  try {
+    const user = await registerUser({ username, email, password });
 
-  res.send(user);
+    res.status(201).send(user);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
 };
 
 module.exports = {
